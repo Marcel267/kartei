@@ -1,5 +1,62 @@
 <?php
-$array = ['test', 'joiasjfi', 'kljfaksdf'];
+require_once 'Kartei.php';
+require_once 'Freund.php';
+require_once 'Adresse.php';
+
+// neue Kartei anlegen
+$kartei = new Kartei();
+
+// neue Freunde hinzufügen
+$freund1 = new Freund('Max', 'Mustermann', '01.01.2000', array(new Adresse('12345', 'Berlin', 'Musterstraße 1'), new Adresse('12345', 'Berlin', 'Musterstraße 1')));
+$freund2 = new Freund('Anna', 'Müller', '02.02.2001', array(new Adresse('23456', 'Hamburg', 'Musterstraße 2')));
+$kartei->addFreund($freund1);
+$kartei->addFreund($freund2);
+
+// var_dump($freund1);
+// var_dump($freund2);
+// die();
+
+// // Freund mit Schlüssel '1' ausgeben
+// $freund1_gefunden = $kartei->getFreundByKey(1);
+// echo "Freund mit Schlüssel '1': " . $freund1_gefunden->getFullName() . "<hr>";
+
+// // Freund mit Nachnamen 'Müller' ausgeben
+// $freunde_mit_müller = $kartei->searchFreundeByNachname('Müller');
+// echo "Freunde mit Nachnamen 'Müller': <br>";
+// foreach ($freunde_mit_müller as $freund) {
+//     echo "- " . $freund->getFullName() . "<br>";
+// }
+// echo "<hr>";
+
+// print_r($freund1);
+// print_r($freund2->getAdressen());
+// die();
+
+// Freunde bearbeiten
+// $freund2->setVorname('Hannah');
+// $freund2->addAdresse(new Adresse('34567', 'Berlin', 'Musterstraße 3'));
+
+// Freunde löschen
+// $kartei->removeFreundByKey($freund1->getId());
+
+// var_dump($freund2);
+// die();
+
+// alle Freunde ausgeben
+// echo "Alle Freunde in der Kartei:<br>";
+// foreach ($kartei->getFreunde() as $freund) {
+//     echo "- " . $freund->getFullName() . "<br>";
+// }
+// echo "<hr>";
+
+// Adressliste aller Freunde erstellen
+// echo "Adressliste aller Freunde:<br>";
+// foreach ($kartei->getFreunde() as $freund) {
+//     echo $freund->getId() . ". " . $freund->getFullName() . ":<br>";
+//     foreach ($freund->getAdressen() as $adresse) {
+//         echo "- " . $adresse->getPlz() . " " . $adresse->getOrt() . ", " . $adresse->getStraße() . "<br>";
+//     }
+// }
 ?>
 
 <!DOCTYPE html>
@@ -11,16 +68,7 @@ $array = ['test', 'joiasjfi', 'kljfaksdf'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../dist/output.css" rel="stylesheet">
     <title>Document</title>
-    <style>
-        /* *,
-        html {
-            background-color: #0F172A;
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
-            color: aliceblue;
-        } */
-    </style>
     <script>
-        // document.documentElement.style.backgroundColor = 'red'
         // On page load or when changing themes, best to add inline in `head` to avoid FOUC
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
@@ -42,26 +90,28 @@ $array = ['test', 'joiasjfi', 'kljfaksdf'];
         </svg>
     </button>
 
-
     <div class="pt-5">
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg ">
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800">
                     Freunde
                 </caption>
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" class="px-6 py-3">
-                            Name
+                            Id
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Color
+                            Vorname
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Category
+                            Nachnahme
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Price
+                            Geburtsdatum
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Adressen
                         </th>
                         <th scope="col" class="px-6 py-3">
                             <span class="sr-only">Edit</span>
@@ -69,63 +119,34 @@ $array = ['test', 'joiasjfi', 'kljfaksdf'];
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            Apple MacBook Pro 17"
-                        </th>
-                        <td class="px-6 py-4">
-                            Silver
-                        </td>
-                        <td class="px-6 py-4">
-                            Laptop
-                        </td>
-                        <td class="px-6 py-4">
-                            $2999
-                        </td>
-                        <td class="px-6 py-4 text-right">
-                            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                        </td>
-                    </tr>
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            Microsoft Surface Pro
-                        </th>
-                        <td class="px-6 py-4">
-                            White
-                        </td>
-                        <td class="px-6 py-4">
-                            Laptop PC
-                        </td>
-                        <td class="px-6 py-4">
-                            $1999
-                        </td>
-                        <td class="px-6 py-4 text-right">
-                            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                        </td>
-                    </tr>
-                    <tr class="bg-white dark:bg-gray-800">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            Magic Mouse 2
-                        </th>
-                        <td class="px-6 py-4">
-                            Black
-                        </td>
-                        <td class="px-6 py-4">
-                            Accessories
-                        </td>
-                        <td class="px-6 py-4">
-                            $99
-                        </td>
-                        <td class="px-6 py-4 text-right">
-                            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                        </td>
-                    </tr>
+                    <?php foreach ($kartei->getFreunde() as $freund) { ?>
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                <?= $freund->getId() ?>
+                            </th>
+                            <td class="px-6 py-4">
+                                <?= $freund->getVorname() ?>
+                            </td>
+                            <td class="px-6 py-4">
+                                <?= $freund->getNachname() ?>
+                            </td>
+                            <td class="px-6 py-4">
+                                <?= $freund->getGeburtsdatum() ?>
+                            </td>
+                            <td class="px-6 py-4">
+                                <?php foreach ($freund->getAdressen() as $adresse) { ?>
+                                    <?php echo "PLZ: " . $adresse->getPlz() . ", Ort: " . $adresse->getOrt() . ", Straße: " . $adresse->getStraße() . "<br>"; ?>
+                                <?php } ?>
+                            </td>
+                            <td class="px-6 py-4 text-right">
+                                <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                            </td>
+                        </tr>
+                    <?php } ?>
                 </tbody>
             </table>
         </div>
     </div>
-
-
 
 
     <script src="script.js"></script>

@@ -9,12 +9,13 @@ class Freund
     private $geburtsdatum;
     private $adressen = array();
 
-    public function __construct($vorname, $nachname, $geburtsdatum)
+    public function __construct($vorname, $nachname, $geburtsdatum, $adressen)
     {
         $this->id = self::$nextId++;
         $this->vorname = $vorname;
         $this->nachname = $nachname;
         $this->geburtsdatum = $geburtsdatum;
+        $this->adressen = $adressen;
     }
 
     public function getId()
@@ -42,9 +43,14 @@ class Freund
         return $this->adressen;
     }
 
-    public function addAdresse($plz, $ort, $straße)
+    public function getFullName()
     {
-        $this->adressen[] = new Adresse($plz, $ort, $straße);
+        return $this->vorname . ' ' . $this->nachname;
+    }
+
+    public function addAdresse(Adresse $adresse)
+    {
+        $this->adressen[] = $adresse;
     }
 
     public function setVorname($vorname)

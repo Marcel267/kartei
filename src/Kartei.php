@@ -14,10 +14,21 @@ class Kartei
         $this->freunde[] = $freund;
     }
 
+    public function getFreundByKey($key)
+    {
+        foreach ($this->freunde as $freund) {
+            if ($freund->getId() == $key) {
+                return $freund;
+            }
+        }
+        return null;
+    }
+
+
     public function removeFreundByKey(int $key): bool
     {
         foreach ($this->freunde as $index => $freund) {
-            if ($freund->getKey() === $key) {
+            if ($freund->getId() === $key) {
                 unset($this->freunde[$index]);
                 return true;
             }
