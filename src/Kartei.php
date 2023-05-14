@@ -51,7 +51,8 @@ class Kartei
     {
         $result = [];
         foreach ($this->freunde as $freund) {
-            if ($freund->getNachname() === $nachname) {
+            // if (strtolower($freund->getNachname()) === strtolower($nachname)) {
+            if (str_contains(strtolower($freund->getNachname()), strtolower($nachname))) {
                 $result[] = $freund;
             }
         }

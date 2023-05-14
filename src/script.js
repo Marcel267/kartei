@@ -1,3 +1,4 @@
+/**Theme Switch */
 var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
 var themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
 
@@ -36,5 +37,16 @@ themeToggleBtn.addEventListener('click', function () {
             localStorage.setItem('color-theme', 'dark');
         }
     }
+});
+
+/**Clear Form */
+var resetBtn = document.getElementById('search-reset');
+var searchInput = document.getElementById('search-input');
+var searchForm = document.getElementById('search-form');
+
+resetBtn.addEventListener('click', () => {
+    // console.log(document.getElementById('search-input'));
+    searchInput.value = "";
+    searchForm.submit();
 
 });
