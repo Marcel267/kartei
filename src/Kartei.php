@@ -14,7 +14,7 @@ class Kartei
         $this->freunde[] = $freund;
     }
 
-    public function getFreundByKey($key)
+    public function getFreundByKey(int $key)
     {
         foreach ($this->freunde as $freund) {
             if ($freund->getId() == $key) {

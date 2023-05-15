@@ -2,14 +2,14 @@
 
 class Freund
 {
-    private static $nextId = 1;
-    private $id;
-    private $vorname;
-    private $nachname;
-    private $geburtsdatum;
-    private $adressen = array();
+    private static int $nextId = 1;
+    private int $id;
+    private string $vorname;
+    private string $nachname;
+    private string $geburtsdatum;
+    private array $adressen;
 
-    public function __construct($vorname, $nachname, $geburtsdatum, $adressen)
+    public function __construct(string $vorname, string $nachname, string $geburtsdatum, array $adressen)
     {
         $this->id = self::$nextId++;
         $this->vorname = $vorname;
@@ -18,32 +18,32 @@ class Freund
         $this->adressen = $adressen;
     }
 
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getVorname()
+    public function getVorname(): string
     {
         return $this->vorname;
     }
 
-    public function getNachname()
+    public function getNachname(): string
     {
         return $this->nachname;
     }
 
-    public function getGeburtsdatum()
+    public function getGeburtsdatum(): string
     {
         return $this->geburtsdatum;
     }
 
-    public function getAdressen()
+    public function getAdressen(): array
     {
         return $this->adressen;
     }
 
-    public function getFullName()
+    public function getFullName(): string
     {
         return $this->vorname . ' ' . $this->nachname;
     }
@@ -53,22 +53,22 @@ class Freund
         $this->adressen[] = $adresse;
     }
 
-    public function setVorname($vorname)
+    public function setVorname(string $vorname)
     {
         $this->vorname = $vorname;
     }
 
-    public function setNachname($nachname)
+    public function setNachname(string $nachname)
     {
         $this->nachname = $nachname;
     }
 
-    public function setGeburtsdatum($geburtsdatum)
+    public function setGeburtsdatum(string $geburtsdatum)
     {
         $this->geburtsdatum = $geburtsdatum;
     }
 
-    public function setAdressen($adressen)
+    public function setAdressen(array $adressen)
     {
         $this->adressen = $adressen;
     }
