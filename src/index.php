@@ -1,4 +1,5 @@
 <?php
+//TEST
 require_once 'Kartei.php';
 require_once 'Freund.php';
 require_once 'Adresse.php';
