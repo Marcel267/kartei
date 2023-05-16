@@ -242,3 +242,54 @@ echo "Anzahl der Freunde in der Kartei: " . $kartei->getAnzahlFreunde() . "\n";
 //         echo "- " . $adresse->getStrasse() . ", " . $adresse->getPlz() . " " . $adresse->getOrt() . "\n";
 //     }
 // }
+// _____________________________________
+
+// print_r($kartei);
+// die();
+
+
+// var_dump($freund1);
+// var_dump($freund2);
+// die();
+
+// // Freund mit Schlüssel '1' ausgeben
+// $freund1_gefunden = $kartei->getFreundByKey(1);
+// echo "Freund mit Schlüssel '1': " . $freund1_gefunden->getFullName() . "<hr>";
+
+// // Freund mit Nachnamen 'Müller' ausgeben
+// $freunde_mit_müller = $kartei->searchFreundeByNachname('Müller');
+// echo "Freunde mit Nachnamen 'Müller': <br>";
+// foreach ($freunde_mit_müller as $freund) {
+//     echo "- " . $freund->getFullName() . "<br>";
+// }
+// echo "<hr>";
+
+// print_r($freund1);
+// print_r($freund2->getAdressen());
+// die();
+
+// Freunde bearbeiten
+// $freund2->setVorname('Hannah');
+// $freund2->addAdresse(new Adresse('34567', 'Berlin', 'Musterstraße 3'));
+
+// Freunde löschen
+// $kartei->removeFreundByKey($freund1->getId());
+
+// var_dump($freund2);
+// die();
+
+// alle Freunde ausgeben
+// echo "Alle Freunde in der Kartei:<br>";
+// foreach ($kartei->getFreunde() as $freund) {
+//     echo "- " . $freund->getFullName() . "<br>";
+// }
+// echo "<hr>";
+
+// Adressliste aller Freunde erstellen
+// echo "Adressliste aller Freunde:<br>";
+// foreach ($kartei->getFreunde() as $freund) {
+//     echo $freund->getId() . ". " . $freund->getFullName() . ":<br>";
+//     foreach ($freund->getAdressen() as $adresse) {
+//         echo "- " . $adresse->getPlz() . " " . $adresse->getOrt() . ", " . $adresse->getStraße() . "<br>";
+//     }
+// }
