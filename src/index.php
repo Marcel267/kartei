@@ -1,4 +1,5 @@
 <?php
+//TEST
 include('Components/_header.php');
 
 // get Kartei aus Session, wenn nicht da lege alles an
