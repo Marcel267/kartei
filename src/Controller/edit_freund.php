@@ -11,9 +11,7 @@ if (!isset($_SESSION['kartei'])) {
 $kartei = $_SESSION['kartei'];
 $freunde = $kartei->getFreunde();
 
-// Get object ID from the query parameter
 $freundId = $_GET['freundId'] ?? null;
-
 if (!$freundId) {
     echo 'Keine Id erhalten!';
     exit();
@@ -28,7 +26,6 @@ foreach ($freunde as $freund) {
     }
 }
 
-// Check if the object was found
 if (!$editFreund) {
     echo 'Freund nicht gefunden!';
     exit();
@@ -44,7 +41,7 @@ $adressenCount = $adressen ? (count($adressen) > 1 ? count($adressen) . " Adress
 
 //if form submitted
 if ($_POST) {
-    $errors = validateFields(['vorname' => 'string', 'nachname' => 'string', 'geburtsdatum' => 'string']);
+    $errors = $kartei->validateFields(['vorname' => 'string', 'nachname' => 'string', 'geburtsdatum' => 'string']);
 
     // if form is valid
     if (empty($errors)) {
@@ -53,23 +50,10 @@ if ($_POST) {
         $editFreund->setGeburtsdatum($_POST['geburtsdatum']);
 
         // $_SESSION['nachricht'] = 'Erfolgreich gespeichert'; für alert oder so...
-        //villeicht redirect
+        //redirect
+        header("Location: " . $_SERVER['url'] . "/kartei/src/index.php");
+        die();
     }
-}
-
-function validateFields(array $fields): array
-{
-    $errors = [];
-    foreach ($fields as $propertyName => $expectedType) {
-        if (empty($_POST[$propertyName])) {
-            $errors[$propertyName] = $propertyName . ' ist leer';
-        } elseif ($expectedType === 'numeric' && !is_numeric($_POST[$propertyName])) {
-            $errors[$propertyName] = $propertyName . ' muss ein ' . $expectedType . ' sein';
-        } elseif ($expectedType === 'string' && is_numeric($_POST[$propertyName])) {
-            $errors[$propertyName] = $propertyName . ' muss ein ' . $expectedType . ' sein';
-        }
-    }
-    return $errors;
 }
 
 
@@ -89,7 +73,6 @@ function validateFields(array $fields): array
             <p class="mt-2 text-sm text-red-600 dark:text-red-500">
                 <span class="font-medium">
                     <?php
-                    // echo isset($errors['vornameEmpty']) ? $errors['vornameEmpty'] . '<br>' : '';
                     echo isset($errors['vorname']) ? $errors['vorname'] : '';
                     ?>
                 </span>
@@ -101,7 +84,6 @@ function validateFields(array $fields): array
             <p class="mt-2 text-sm text-red-600 dark:text-red-500">
                 <span class="font-medium">
                     <?php
-                    // echo isset($errors['nachnameEmpty']) ? $errors['nachnameEmpty'] . '<br>' : '';
                     echo isset($errors['nachname']) ? $errors['nachname'] : '';
                     ?>
                 </span>
@@ -113,7 +95,6 @@ function validateFields(array $fields): array
             <p class="mt-2 text-sm text-red-600 dark:text-red-500">
                 <span class="font-medium">
                     <?php
-                    // echo isset($errors['geburtsdatumEmpty']) ? $errors['geburtsdatumEmpty'] . '<br>' : '';
                     echo isset($errors['geburtsdatum']) ? $errors['geburtsdatum'] : '';
                     ?>
                 </span>
@@ -163,7 +144,7 @@ function validateFields(array $fields): array
                                 <?= $adresse->getStraße() ?>
                             </td>
                             <td class="px-6 py-4 text-right">
-                                <a href="Controller/edit_freund.php?id=<?= $freund->getId() ?>&kartei=<?= urlencode(serialize($kartei)) ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                <a href="<?= $_SERVER['url'] ?>/kartei/src/Controller/edit_adresse.php?adresseId=<?= $adresse->getId() ?>&freundId=<?= $freundId  ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                             </td>
                         </tr>
                     <?php } ?>
@@ -173,16 +154,16 @@ function validateFields(array $fields): array
         </div>
     </div> -->
 </div>
-<!-- <div class="grid grid-rows-3 grid-flow-col gap-5"> -->
-<div class="flex max-w-lg flex-wrap gap-5">
+
+<div class="flex max-w-2xl flex-wrap gap-5 mt-5">
     <?php foreach ($adressen as $adresse) { ?>
-        <div class="max-w-fit p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        <div class="w-48 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <div class="mb-3">
                 <?= $adresse->getPlz() ?> <br>
                 <?= $adresse->getOrt() ?><br>
                 <?= $adresse->getStraße() ?><br>
             </div>
-            <a href="<?= $_SERVER['url'] ?>/kartei/src/Controller/edit_adresse.php?adresseId=<?= $adresse->getId() ?>&freundId=<?=$freundId  ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+            <a href="<?= $_SERVER['url'] ?>/kartei/src/Controller/edit_adresse.php?adresseId=<?= $adresse->getId() ?>&freundId=<?= $freundId  ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
         </div>
     <?php } ?>
 </div>

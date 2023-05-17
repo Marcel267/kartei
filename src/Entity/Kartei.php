@@ -9,6 +9,21 @@ class Kartei
         $this->freunde = [];
     }
 
+    public function validateFields(array $fields): array
+    {
+        $errors = [];
+        foreach ($fields as $propertyName => $expectedType) {
+            if (empty($_POST[$propertyName])) {
+                $errors[$propertyName] = $propertyName . ' darf nicht leer sein';
+            } elseif ($expectedType === 'numeric' && !is_numeric($_POST[$propertyName])) {
+                $errors[$propertyName] = $propertyName . ' muss ein ' . $expectedType . ' sein';
+            } elseif ($expectedType === 'string' && is_numeric($_POST[$propertyName])) {
+                $errors[$propertyName] = $propertyName . ' muss ein ' . $expectedType . ' sein';
+            }
+        }
+        return $errors;
+    }
+
     public function addFreund(Freund $freund): void
     {
         $this->freunde[] = $freund;

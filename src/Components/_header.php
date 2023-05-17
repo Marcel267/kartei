@@ -2,8 +2,8 @@
 require_once __DIR__ . '/../Entity/Kartei.php';
 require_once __DIR__ . '/../Entity/Freund.php';
 require_once __DIR__ . '/../Entity/Adresse.php';
-$_SERVER['url'] = 'http://localhost/workspace/schule';
-// $_SERVER['url'] = 'http://localhost/code';
+// $_SERVER['url'] = 'http://localhost/workspace/schule';
+$_SERVER['url'] = 'http://localhost/code';
 
 session_start();
 ?>
@@ -33,7 +33,7 @@ session_start();
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <a href="<?= $_SERVER['url'] ?>/kartei/src/index.php" class="flex items-center">
                 <span class="self-center text-3xl font-semibold whitespace-nowrap dark:text-white flex items-center gap-3">
-                <!--hover:underline underline-offset-4-->
+                    <!--hover:underline underline-offset-4-->
                     <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path clip-rule="evenodd" fill-rule="evenodd" d="M8.25 6.75a3.75 3.75 0 117.5 0 3.75 3.75 0 01-7.5 0zM15.75 9.75a3 3 0 116 0 3 3 0 01-6 0zM2.25 9.75a3 3 0 116 0 3 3 0 01-6 0zM6.31 15.117A6.745 6.745 0 0112 12a6.745 6.745 0 016.709 7.498.75.75 0 01-.372.568A12.696 12.696 0 0112 21.75c-2.305 0-4.47-.612-6.337-1.684a.75.75 0 01-.372-.568 6.787 6.787 0 011.019-4.38z"></path>

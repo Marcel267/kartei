@@ -5,16 +5,19 @@ if (!isset($_SESSION['kartei'])) {
     echo 'Kartei nicht erhalten!';
     return;
 }
+
 $adresseId = $_GET['adresseId'] ?? null;
 if (!$adresseId) {
     echo 'Keine adresseId erhalten!';
     exit();
 }
+
 $freundId = $_GET['freundId'] ?? null;
 if (!$freundId) {
     echo 'Keine freundId erhalten!';
     exit();
 }
+
 $kartei = $_SESSION['kartei'];
 $freund = $kartei->getFreundByKey($freundId);
 if (!$freund) {
@@ -22,18 +25,16 @@ if (!$freund) {
     exit();
 }
 
-
 // Find the corresponding object from the list
 $adressen = $freund->getAdressen();
 $editAdresse = null;
 foreach ($adressen as $adresse) {
-    if ($adresse->getId() == $adressen) {
+    if ($adresse->getId() == $adresseId) {
         $editAdresse = $adresse;
         break;
     }
 }
 
-// Check if the object was found
 if (!$editAdresse) {
     echo 'Adresse nicht gefunden!';
     exit();
@@ -42,14 +43,10 @@ if (!$editAdresse) {
 $plz = $editAdresse->getPlz();
 $ort = $editAdresse->getOrt();
 $straße = $editAdresse->getStraße();
-$adressen = $editFreund->getAdressen();
-
-
-// $adressenCount = $adressen ? (count($adressen) > 1 ? count($adressen) . " Adressen" : count($adressen) . " Adresse") : "Keine Adresse vorhanden";
 
 //if form submitted
 if ($_POST) {
-    $errors = validateFields(['plz' => 'string', 'ort' => 'string', 'straße' => 'string']);
+    $errors = $kartei->validateFields(['plz' => 'numeric', 'ort' => 'string', 'straße' => 'string']);
 
     // if form is valid
     if (empty($errors)) {
@@ -58,30 +55,17 @@ if ($_POST) {
         $editAdresse->setStraße($_POST['straße']);
 
         // $_SESSION['nachricht'] = 'Erfolgreich gespeichert'; für alert oder so...
-        //villeicht redirect
+        //redirect
+        header("Location: " . $_SERVER['url'] . "/kartei/src/Controller/edit_freund.php?freundId=" . $freundId);
+        die();
     }
-}
-
-function validateFields(array $fields): array
-{
-    $errors = [];
-    foreach ($fields as $propertyName => $expectedType) {
-        if (empty($_POST[$propertyName])) {
-            $errors[$propertyName] = $propertyName . ' ist leer';
-        } elseif ($expectedType === 'numeric' && !is_numeric($_POST[$propertyName])) {
-            $errors[$propertyName] = $propertyName . ' muss ein ' . $expectedType . ' sein';
-        } elseif ($expectedType === 'string' && is_numeric($_POST[$propertyName])) {
-            $errors[$propertyName] = $propertyName . ' muss ein ' . $expectedType . ' sein';
-        }
-    }
-    return $errors;
 }
 ?>
 <h2 class="text-2xl font-semibold dark:text-white mb-5 flex items-center gap-3">
     <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path clip-rule="evenodd" fill-rule="evenodd" d="M11.54 22.351l.07.04.028.016a.76.76 0 00.723 0l.028-.015.071-.041a16.975 16.975 0 001.144-.742 19.58 19.58 0 002.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 00-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 002.682 2.282 16.975 16.975 0 001.145.742zM12 13.5a3 3 0 100-6 3 3 0 000 6z"></path>
     </svg>
-    Adressen bearbeiten
+    Adresse bearbeiten
 </h2>
 
 <div class="max-w-md pb-5">
@@ -92,7 +76,6 @@ function validateFields(array $fields): array
             <p class="mt-2 text-sm text-red-600 dark:text-red-500">
                 <span class="font-medium">
                     <?php
-                    // echo isset($errors['vornameEmpty']) ? $errors['vornameEmpty'] . '<br>' : '';
                     echo isset($errors['plz']) ? $errors['plz'] : '';
                     ?>
                 </span>
@@ -104,7 +87,6 @@ function validateFields(array $fields): array
             <p class="mt-2 text-sm text-red-600 dark:text-red-500">
                 <span class="font-medium">
                     <?php
-                    // echo isset($errors['nachnameEmpty']) ? $errors['nachnameEmpty'] . '<br>' : '';
                     echo isset($errors['ort']) ? $errors['ort'] : '';
                     ?>
                 </span>
@@ -116,7 +98,6 @@ function validateFields(array $fields): array
             <p class="mt-2 text-sm text-red-600 dark:text-red-500">
                 <span class="font-medium">
                     <?php
-                    // echo isset($errors['geburtsdatumEmpty']) ? $errors['geburtsdatumEmpty'] . '<br>' : '';
                     echo isset($errors['straße']) ? $errors['straße'] : '';
                     ?>
                 </span>
