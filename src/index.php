@@ -10,6 +10,9 @@ if (isset($_SESSION['kartei'])) {
     $freund1 = new Freund('Max', 'Mustermann', '01.01.2000', array(
         new Adresse('12345', 'Berlin', 'Musterstraße 1'),
         new Adresse('12345', 'Berlin', 'Musterstraße 1'),
+        new Adresse('12345', 'Berlin', 'Musterstraße 1'),
+        new Adresse('12345', 'Berlin', 'Musterstraße 1'),
+        new Adresse('12345', 'Berlin', 'Musterstraße 1'),
     ));
     $freund2 = new Freund('Anna', 'Müller', '02.02.2001', array(new Adresse('23456', 'Hamburg', 'Musterstraße 2')));
     $freund3 = new Freund('Anna', 'Müller', '02.02.2001', array());
@@ -18,7 +21,8 @@ if (isset($_SESSION['kartei'])) {
     $kartei->addFreund($freund3);
     $_SESSION['kartei'] = $kartei;
 }
-session_reset();
+// session_destroy();
+// var_dump($_SESSION['kartei']);
 // print_r($_SESSION['kartei']);
 //suche freunde
 $freunde = [];
@@ -115,7 +119,7 @@ $freundeCount = $freunde ? (count($freunde) > 1 ? count($freunde) . " Freunde" :
                             <?php } ?>
                         </td>
                         <td class="px-6 py-4 text-right">
-                            <a href="Controller/edit_freund.php?id=<?= $freund->getId() ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                            <a href="<?= $_SERVER['url'] ?>/kartei/src/Controller/edit_freund.php?freundId=<?= $freund->getId() ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                         </td>
                     </tr>
                 <?php } ?>

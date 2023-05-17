@@ -1,7 +1,8 @@
 <?php
 
 include('../Components/_header.php');
-
+// var_dump($_SESSION['kartei']);
+// die();
 //get freunde
 if (!isset($_SESSION['kartei'])) {
     echo 'Kartei nicht erhalten!';
@@ -11,7 +12,7 @@ $kartei = $_SESSION['kartei'];
 $freunde = $kartei->getFreunde();
 
 // Get object ID from the query parameter
-$freundId = $_GET['id'] ?? null;
+$freundId = $_GET['freundId'] ?? null;
 
 if (!$freundId) {
     echo 'Keine Id erhalten!';
@@ -73,6 +74,12 @@ function validateFields(array $fields): array
 
 
 ?>
+<h2 class="text-2xl font-semibold dark:text-white mb-5 flex items-center gap-3">
+    <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path clip-rule="evenodd" fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"></path>
+    </svg>
+    Freund bearbeiten
+</h2>
 
 <div class="max-w-md pb-5">
     <form method="POST">
@@ -113,7 +120,7 @@ function validateFields(array $fields): array
             </p>
         </div>
 
-        <input type="hidden" name="id" value="<?= $_GET['id']; ?>">
+        <input type="hidden" name="freundId" value="<?= $_GET['freundId']; ?>">
 
         <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save</button>
     </form>
@@ -166,7 +173,6 @@ function validateFields(array $fields): array
         </div>
     </div> -->
 </div>
-
 <!-- <div class="grid grid-rows-3 grid-flow-col gap-5"> -->
 <div class="flex max-w-lg flex-wrap gap-5">
     <?php foreach ($adressen as $adresse) { ?>
@@ -176,7 +182,7 @@ function validateFields(array $fields): array
                 <?= $adresse->getOrt() ?><br>
                 <?= $adresse->getStraße() ?><br>
             </div>
-            <a href="Controller/edit_freund.php?id=<?= $freund->getId() ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+            <a href="<?= $_SERVER['url'] ?>/kartei/src/Controller/edit_adresse.php?adresseId=<?= $adresse->getId() ?>&freundId=<?=$freundId  ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
         </div>
     <?php } ?>
 </div>
