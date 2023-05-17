@@ -49,7 +49,7 @@ if ($_POST) {
         $editFreund->setNachname($_POST['nachname']);
         $editFreund->setGeburtsdatum($_POST['geburtsdatum']);
 
-        // $_SESSION['nachricht'] = 'Erfolgreich gespeichert'; für alert oder so...
+        $_SESSION['success'] = 'Erfolgreich gespeichert'; //für alert oder so...
         //redirect
         header("Location: " . $_SERVER['url'] . "/kartei/src/index.php");
         die();
