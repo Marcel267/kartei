@@ -8,10 +8,8 @@ $_SERVER['url'] = 'http://localhost/code';
 session_start();
 
 if (isset($_SESSION['success'])) {
-    // var_dump($_SESSION['success']);
     $nachricht = $_SESSION['success'];
     unset($_SESSION['success']);
-    // var_dump($_SESSION['success']);
 }
 ?>
 <!DOCTYPE html>

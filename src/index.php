@@ -119,7 +119,13 @@ $freundeCount = $freunde ? (count($freunde) > 1 ? count($freunde) . " Freunde" :
                             <?php } ?>
                         </td>
                         <td class="px-6 py-4 text-right">
-                            <a href="<?= $_SERVER['url'] ?>/kartei/src/Controller/edit_freund.php?freundId=<?= $freund->getId() ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                            <a href="<?= $_SERVER['url'] ?>/kartei/src/Controller/edit_freund.php?freundId=<?= $freund->getId() ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                                Edit
+                            </a>
+                            <br>
+                            <a href="<?= $_SERVER['url'] ?>/kartei/src/Controller/delete_freund.php?freundId=<?= $freund->getId() ?>" class="font-medium text-red-600 dark:text-red-500 hover:underline">
+                                Delete
+                            </a>
                         </td>
                     </tr>
                 <?php } ?>

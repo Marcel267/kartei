@@ -25,16 +25,7 @@ if (!$freund) {
     exit();
 }
 
-// Find the corresponding object from the list
-$adressen = $freund->getAdressen();
-$editAdresse = null;
-foreach ($adressen as $adresse) {
-    if ($adresse->getId() == $adresseId) {
-        $editAdresse = $adresse;
-        break;
-    }
-}
-
+$editAdresse = $freund->getAdresseByKey($adresseId);
 if (!$editAdresse) {
     echo 'Adresse nicht gefunden!';
     exit();

@@ -1,15 +1,10 @@
 <?php
-
 include('../Components/_header.php');
-// var_dump($_SESSION['kartei']);
-// die();
-//get freunde
+
 if (!isset($_SESSION['kartei'])) {
     echo 'Kartei nicht erhalten!';
     return;
 }
-$kartei = $_SESSION['kartei'];
-$freunde = $kartei->getFreunde();
 
 $freundId = $_GET['freundId'] ?? null;
 if (!$freundId) {
@@ -17,15 +12,8 @@ if (!$freundId) {
     exit();
 }
 
-// Find the corresponding object from the list
-$editFreund = null;
-foreach ($freunde as $freund) {
-    if ($freund->getId() == $freundId) {
-        $editFreund = $freund;
-        break;
-    }
-}
-
+$kartei = $_SESSION['kartei'];
+$editFreund = $kartei->getFreundByKey($freundId);
 if (!$editFreund) {
     echo 'Freund nicht gefunden!';
     exit();
@@ -48,6 +36,7 @@ if ($_POST) {
         $editFreund->setVorname($_POST['vorname']);
         $editFreund->setNachname($_POST['nachname']);
         $editFreund->setGeburtsdatum($_POST['geburtsdatum']);
+        // $freund = new Freund();
 
         $_SESSION['success'] = 'Erfolgreich gespeichert'; //für alert oder so...
         //redirect
@@ -164,6 +153,9 @@ if ($_POST) {
                 <?= $adresse->getStraße() ?><br>
             </div>
             <a href="<?= $_SERVER['url'] ?>/kartei/src/Controller/edit_adresse.php?adresseId=<?= $adresse->getId() ?>&freundId=<?= $freundId  ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+            <a href="<?= $_SERVER['url'] ?>/kartei/src/Controller/delete_adresse.php?freundId=<?= $freund->getId() ?>&adresseId=<?= $adresse->getId() ?>" class="font-medium text-red-600 dark:text-red-500 hover:underline">
+                Delete
+            </a>
         </div>
     <?php } ?>
 </div>

@@ -43,16 +43,6 @@ class Freund
         return $this->adressen;
     }
 
-    public function getFullName(): string
-    {
-        return $this->vorname . ' ' . $this->nachname;
-    }
-
-    public function addAdresse(Adresse $adresse)
-    {
-        $this->adressen[] = $adresse;
-    }
-
     public function setVorname(string $vorname)
     {
         $this->vorname = $vorname;
@@ -71,5 +61,36 @@ class Freund
     public function setAdressen(array $adressen)
     {
         $this->adressen = $adressen;
+    }
+
+    public function addAdresse(Adresse $adresse)
+    {
+        $this->adressen[] = $adresse;
+    }
+
+    public function removeAdresseByKey(int $key): bool
+    {
+        foreach ($this->adressen as $index => $adresse) {
+            if ($adresse->getId() === $key) {
+                unset($this->adressen[$index]);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function getAdresseByKey(int|string $key)
+    {
+        foreach ($this->adressen as $adresse) {
+            if ($adresse->getId() == $key) {
+                return $adresse;
+            }
+        }
+        return null;
+    }
+
+    public function getFullName(): string
+    {
+        return $this->vorname . ' ' . $this->nachname;
     }
 }
