@@ -54,97 +54,9 @@ if ($_POST) {
     Freund bearbeiten
 </h2>
 
-<div class="max-w-md pb-5">
-    <form method="POST">
-        <div class="mb-6">
-            <label for="vorname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Vorname</label>
-            <input type="text" name="vorname" id="vorname" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?= $_POST['vorname'] ?? $vorname ?>">
-            <p class="mt-2 text-sm text-red-600 dark:text-red-500">
-                <span class="font-medium">
-                    <?php
-                    echo isset($errors['vorname']) ? $errors['vorname'] : '';
-                    ?>
-                </span>
-            </p>
-        </div>
-        <div class="mb-6">
-            <label for="nachname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nachname</label>
-            <input type="text" name="nachname" id="nachname" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?= $_POST['nachname'] ?? $nachname ?>">
-            <p class="mt-2 text-sm text-red-600 dark:text-red-500">
-                <span class="font-medium">
-                    <?php
-                    echo isset($errors['nachname']) ? $errors['nachname'] : '';
-                    ?>
-                </span>
-            </p>
-        </div>
-        <div class="mb-6">
-            <label for="geburtsdatum" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Geburtsdatum</label>
-            <input type="text" name="geburtsdatum" id="geburtsdatum" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?= $_POST['geburtsdatum'] ?? $geburtsdatum ?>">
-            <p class="mt-2 text-sm text-red-600 dark:text-red-500">
-                <span class="font-medium">
-                    <?php
-                    echo isset($errors['geburtsdatum']) ? $errors['geburtsdatum'] : '';
-                    ?>
-                </span>
-            </p>
-        </div>
+<?php include('../Form/_freund.php'); ?>
 
-        <input type="hidden" name="freundId" value="<?= $_GET['freundId']; ?>">
-
-        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save</button>
-    </form>
-
-
-
-
-    <!-- <div class="pt-5">
-        <div class="relative overflow-x-auto shadow-md rounded-lg">
-            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800">
-                    <?= $adressenCount ?>
-                </caption>
-                <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
-                    <tr>
-                        <th scope="col" class="px-6 py-3">
-                            Plz
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Ort
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Straße
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            <span class="sr-only">Edit</span>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($adressen as $adresse) { ?>
-                        <tr class="bg-white border-t dark:bg-gray-800 dark:border-gray-700">
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                <?= $adresse->getPlz() ?>
-                            </th>
-                            <td class="px-6 py-4">
-                                <?= $adresse->getOrt() ?>
-                            </td>
-                            <td class="px-6 py-4">
-                                <?= $adresse->getStraße() ?>
-                            </td>
-                            <td class="px-6 py-4 text-right">
-                                <a href="<?= $_SERVER['url'] ?>/kartei/src/Controller/edit_adresse.php?adresseId=<?= $adresse->getId() ?>&freundId=<?= $freundId  ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                            </td>
-                        </tr>
-                    <?php } ?>
-
-                </tbody>
-            </table>
-        </div>
-    </div> -->
-</div>
-
-<div class="flex max-w-2xl flex-wrap gap-5 mt-5">
+<div class="flex max-w-2xl flex-wrap gap-5 mt-5 mb-6">
     <?php foreach ($adressen as $adresse) { ?>
         <div class="w-48 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <div class="mb-3">
@@ -153,16 +65,15 @@ if ($_POST) {
                 <?= $adresse->getStraße() ?><br>
             </div>
             <a href="<?= $_SERVER['url'] ?>/kartei/src/Controller/edit_adresse.php?adresseId=<?= $adresse->getId() ?>&freundId=<?= $freundId  ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-            <a href="<?= $_SERVER['url'] ?>/kartei/src/Controller/delete_adresse.php?freundId=<?= $freund->getId() ?>&adresseId=<?= $adresse->getId() ?>" class="font-medium text-red-600 dark:text-red-500 hover:underline">
+            <a href="<?= $_SERVER['url'] ?>/kartei/src/Controller/delete_adresse.php?freundId=<?= $freundId ?>&adresseId=<?= $adresse->getId() ?>" class="font-medium text-red-600 dark:text-red-500 hover:underline">
                 Delete
             </a>
         </div>
     <?php } ?>
 </div>
-
-
-
-
+<a href="<?= $_SERVER['url'] . '/kartei/src/Controller/add_adresse.php?freundId=' . $freundId ?>" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 ">
+    Adresse anlegen
+</a>
 
 <?php include('../Components/_footer.php');
 // var_dump($_POST)

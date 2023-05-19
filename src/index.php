@@ -7,20 +7,23 @@ if (isset($_SESSION['kartei'])) {
     $kartei = $_SESSION['kartei'];
 } else {
     $kartei = new Kartei();
-    $freund1 = new Freund('Max', 'Mustermann', '01.01.2000', array(
-        new Adresse('12345', 'Berlin', 'Musterstraße 1'),
-        new Adresse('12345', 'Berlin', 'Musterstraße 1'),
-        new Adresse('12345', 'Berlin', 'Musterstraße 1'),
-        new Adresse('12345', 'Berlin', 'Musterstraße 1'),
-        new Adresse('12345', 'Berlin', 'Musterstraße 1'),
-    ));
+    Freund::$nextId = 1;
+    Adresse::$nextId = 1;
+    $freund1 = new Freund('Max', 'Mustermann', '01.01.2000', array(new Adresse('12345', 'Berlin', 'Musterstraße 1')));
+    Freund::$nextId = 2;
+    Adresse::$nextId = 2;
     $freund2 = new Freund('Anna', 'Müller', '02.02.2001', array(new Adresse('23456', 'Hamburg', 'Musterstraße 2')));
+    Freund::$nextId = 3;
     $freund3 = new Freund('Anna', 'Müller', '02.02.2001', array());
     $kartei->addFreund($freund1);
     $kartei->addFreund($freund2);
     $kartei->addFreund($freund3);
     $_SESSION['kartei'] = $kartei;
+    $_SESSION['nextFreundId'] = 4;
+    $_SESSION['nextAdresseId'] = 3;
 }
+// var_dump($_SESSION['nextFreundId']);
+// session_unset();
 // session_destroy();
 // var_dump($_SESSION['kartei']);
 // print_r($_SESSION['kartei']);
@@ -70,11 +73,18 @@ $freundeCount = $freunde ? (count($freunde) > 1 ? count($freunde) . " Freunde" :
     </button> -->
 </div>
 
-<div class="pt-5">
+<div class="mt-4">
     <div class="relative overflow-x-auto shadow-md rounded-lg">
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800">
-                <?= $freundeCount ?>
+                <span>
+                    <?= $freundeCount ?>
+                </span>
+                <span class="float-right">
+                    <a href="<?= $_SERVER['url'] . '/kartei/src/Controller/add_freund.php' ?>" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 ">
+                        Freund anlegen
+                    </a>
+                </span>
             </caption>
             <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
