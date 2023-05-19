@@ -1,5 +1,5 @@
 <?php
-include('../Components/_header.php');
+include('../Components/_require.php');
 
 if (!isset($_SESSION['kartei'])) {
     echo 'Kartei nicht erhalten!';
@@ -45,12 +45,13 @@ if ($_POST) {
         $editAdresse->setOrt($_POST['ort']);
         $editAdresse->setStraße($_POST['straße']);
 
-        $_SESSION['success'] = 'Erfolgreich gespeichert'; //für alert oder so...
+        $_SESSION['success'] = 'Adresse erfolgreich gespeichert'; //für alert oder so...
         //redirect
         header("Location: " . $_SERVER['url'] . "/kartei/src/Controller/edit_freund.php?freundId=" . $freundId);
         die();
     }
 }
+include('../Components/_header.php');
 ?>
 <h2 class="text-2xl font-semibold dark:text-white mb-5 flex items-center gap-3">
     <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">

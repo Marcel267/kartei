@@ -1,5 +1,5 @@
 <?php
-include('../Components/_header.php');
+include('../Components/_require.php');
 
 if (!isset($_SESSION['kartei'])) {
     echo 'Kartei nicht erhalten!';
@@ -36,16 +36,15 @@ if ($_POST) {
         $editFreund->setVorname($_POST['vorname']);
         $editFreund->setNachname($_POST['nachname']);
         $editFreund->setGeburtsdatum($_POST['geburtsdatum']);
-        // $freund = new Freund();
 
-        $_SESSION['success'] = 'Erfolgreich gespeichert'; //für alert oder so...
+        $_SESSION['success'] = 'Freund erfolgreich gespeichert'; //für alert oder so...
         //redirect
         header("Location: " . $_SERVER['url'] . "/kartei/src/index.php");
         die();
     }
 }
 
-
+include('../Components/_header.php');
 ?>
 <h2 class="text-2xl font-semibold dark:text-white mb-5 flex items-center gap-3">
     <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -71,7 +70,10 @@ if ($_POST) {
         </div>
     <?php } ?>
 </div>
-<a href="<?= $_SERVER['url'] . '/kartei/src/Controller/add_adresse.php?freundId=' . $freundId ?>" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 ">
+<a href="<?= $_SERVER['url'] . '/kartei/src/Controller/add_adresse.php?freundId=' . $freundId ?>" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 inline-flex gap-2">
+    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" data-darkreader-inline-fill="">
+        <path clip-rule="evenodd" fill-rule="evenodd" d="M12 5.25a.75.75 0 01.75.75v5.25H18a.75.75 0 010 1.5h-5.25V18a.75.75 0 01-1.5 0v-5.25H6a.75.75 0 010-1.5h5.25V6a.75.75 0 01.75-.75z"></path>
+    </svg>
     Adresse anlegen
 </a>
 

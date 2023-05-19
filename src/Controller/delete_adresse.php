@@ -1,5 +1,5 @@
 <?php
-include('../Components/_header.php');
+include('../Components/_require.php');
 
 if (!isset($_SESSION['kartei'])) {
     echo 'Kartei nicht erhalten!';
@@ -44,3 +44,5 @@ $_SESSION['success'] = 'Adresse erfolgreich entfernt';
 
 header("Location: " . $_SERVER['url'] . "/kartei/src/Controller/edit_freund.php?freundId=" . $freundId);
 die();
+
+include('../Components/_header.php');

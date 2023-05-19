@@ -1,5 +1,5 @@
 <?php
-include('../Components/_header.php');
+include('../Components/_require.php');
 
 if (!isset($_SESSION['kartei'])) {
     echo 'Kartei nicht erhalten!';
@@ -30,3 +30,5 @@ $_SESSION['success'] = 'Freund erfolgreich entfernt';
 
 header("Location: " . $_SERVER['url'] . "/kartei/src/index.php");
 die();
+
+include('../Components/_header.php');
