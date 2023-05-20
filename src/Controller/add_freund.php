@@ -28,7 +28,7 @@ if ($_POST) {
 
         $_SESSION['success'] = 'Freund erfolgreich angelegt'; //für alert oder so...
         //redirect
-        header("Location: " . $_SERVER['url'] . "/kartei/src/index.php");
+        header("Location: " . $_SERVER['url'] . "/kartei/src/Controller/edit_freund.php?freundId=" . $newFreund->getId());
         die();
     }
 }
