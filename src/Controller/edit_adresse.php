@@ -45,7 +45,7 @@ if ($_POST) {
         $editAdresse->setOrt($_POST['ort']);
         $editAdresse->setStraße($_POST['straße']);
 
-        $_SESSION['success'] = 'Adresse erfolgreich gespeichert'; //für alert oder so...
+        $_SESSION['success'] = 'Adresse erfolgreich aktualisiert'; //für alert oder so...
         //redirect
         header("Location: " . $_SERVER['url'] . "/kartei/src/Controller/edit_freund.php?freundId=" . $freundId);
         die();

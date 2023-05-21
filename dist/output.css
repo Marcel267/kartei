@@ -1322,6 +1322,10 @@ select {
   margin-left: auto;
 }
 
+.mr-2 {
+  margin-right: 0.5rem;
+}
+
 .mt-2 {
   margin-top: 0.5rem;
 }
@@ -1332,10 +1336,6 @@ select {
 
 .mt-5 {
   margin-top: 1.25rem;
-}
-
-.mr-2 {
-  margin-right: 0.5rem;
 }
 
 .block {
@@ -1390,10 +1390,6 @@ select {
   height: 2rem;
 }
 
-.h-2 {
-  height: 0.5rem;
-}
-
 .min-h-screen {
   min-height: 100vh;
 }
@@ -1432,10 +1428,6 @@ select {
 
 .w-full {
   width: 100%;
-}
-
-.w-2 {
-  width: 0.5rem;
 }
 
 .max-w-2xl {
@@ -1690,21 +1682,6 @@ select {
   background-color: rgb(255 255 255 / 0.5);
 }
 
-.bg-red-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(240 82 82 / var(--tw-bg-opacity));
-}
-
-.bg-green-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(14 159 110 / var(--tw-bg-opacity));
-}
-
-.bg-green-700 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(4 108 78 / var(--tw-bg-opacity));
-}
-
 .bg-opacity-50 {
   --tw-bg-opacity: 0.5;
 }
@@ -1893,10 +1870,6 @@ select {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-.underline {
-  text-decoration-line: underline;
-}
-
 .opacity-0 {
   opacity: 0;
 }
@@ -2002,10 +1975,6 @@ select {
 
 .hover\:underline:hover {
   text-decoration-line: underline;
-}
-
-.hover\:no-underline:hover {
-  text-decoration-line: none;
 }
 
 .focus\:translate-y-0:focus {
@@ -2224,10 +2193,5 @@ select {
 
   .sm\:w-auto {
     width: auto;
-  }
-
-  .sm\:max-w-fit {
-    max-width: -moz-fit-content;
-    max-width: fit-content;
   }
 }
