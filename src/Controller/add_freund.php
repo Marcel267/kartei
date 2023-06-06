@@ -7,13 +7,6 @@ if (!isset($_SESSION['kartei'])) {
 }
 $kartei = $_SESSION['kartei'];
 
-//to use the form
-$vorname = '';
-$nachname = '';
-$geburtsdatum = '';
-$adressen = '';
-$freundId = '';
-
 //if form submitted
 if ($_POST) {
     $errors = $kartei->validateFields(['vorname' => 'string', 'nachname' => 'string', 'geburtsdatum' => 'string']);
@@ -26,7 +19,7 @@ if ($_POST) {
         $kartei->addFreund($newFreund);
         $_SESSION['nextFreundId'] = $nextId + 1;
 
-        $_SESSION['success'] = 'Freund erfolgreich angelegt'; //für alert oder so...
+        $_SESSION['success'] = 'Freund erfolgreich angelegt';
         //redirect
         header("Location: " . $_SERVER['url'] . "/kartei/src/Controller/edit_freund.php?freundId=" . $newFreund->getId());
         die();
@@ -45,5 +38,4 @@ include('../Components/_header.php');
 <?php
 include('../Form/_freund.php');
 include('../Components/_footer.php');
-// var_dump($_POST)
 ?>

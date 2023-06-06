@@ -1,5 +1,4 @@
 <?php
-//TEST
 include('Components/_require.php');
 
 // get Kartei aus Session, wenn nicht da lege alles an
@@ -22,11 +21,10 @@ if (isset($_SESSION['kartei'])) {
     $_SESSION['nextFreundId'] = 4;
     $_SESSION['nextAdresseId'] = 3;
 }
-// var_dump($_SESSION['nextFreundId']);
+//Mit FormButton triggern? $_POST['resetData'] z.B.
 // session_unset();
 // session_destroy();
-// var_dump($_SESSION['kartei']);
-// print_r($_SESSION['kartei']);
+
 //suche freunde
 $freunde = [];
 if (isset($_GET['search']) && !empty($_GET['search'])) {

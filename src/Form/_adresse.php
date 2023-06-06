@@ -2,7 +2,7 @@
     <form method="POST">
         <div class="mb-6">
             <label for="plz" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">PLZ</label>
-            <input type="text" name="plz" id="plz" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?= $_POST['plz'] ?? $plz ?>">
+            <input type="text" name="plz" id="plz" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?= isset($_POST['plz']) ? $_POST['plz'] : (isset($plz) ? $plz : '') ?>">
             <p class="mt-2 text-sm text-red-600 dark:text-red-500">
                 <span class="font-medium">
                     <?php
@@ -13,7 +13,7 @@
         </div>
         <div class="mb-6">
             <label for="ort" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ort</label>
-            <input type="text" name="ort" id="ort" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?= $_POST['ort'] ?? $ort ?>">
+            <input type="text" name="ort" id="ort" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?= isset($_POST['ort']) ? $_POST['ort'] : (isset($ort) ? $ort : '') ?>">
             <p class="mt-2 text-sm text-red-600 dark:text-red-500">
                 <span class="font-medium">
                     <?php
@@ -24,7 +24,7 @@
         </div>
         <div class="mb-6">
             <label for="straße" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Straße</label>
-            <input type="text" name="straße" id="straße" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?= $_POST['straße'] ?? $straße ?>">
+            <input type="text" name="straße" id="straße" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="<?= isset($_POST['straße']) ? $_POST['straße'] : (isset($straße) ? $straße : '') ?>">
             <p class="mt-2 text-sm text-red-600 dark:text-red-500">
                 <span class="font-medium">
                     <?php

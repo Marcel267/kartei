@@ -18,11 +18,6 @@ if (!$freund) {
     exit();
 }
 
-//to use the form
-$plz = '';
-$ort = '';
-$straße = '';
-
 //if form submitted
 if ($_POST) {
     $errors = $kartei->validateFields(['plz' => 'numeric', 'ort' => 'string', 'straße' => 'string']);
@@ -35,7 +30,7 @@ if ($_POST) {
         $freund->addAdresse($newAdresse);
         $_SESSION['nextAdresseId'] = $nextId + 1;
 
-        $_SESSION['success'] = 'Adresse erfolgreich angelegt'; //für alert oder so...
+        $_SESSION['success'] = 'Adresse erfolgreich angelegt';
         //redirect
         header("Location: " . $_SERVER['url'] . "/kartei/src/Controller/edit_freund.php?freundId=" . $freundId);
         die();
@@ -56,5 +51,4 @@ include('../Components/_header.php');
 <?php
 include('../Form/_adresse.php');
 include('../Components/_footer.php');
-// var_dump($_POST)
 ?>

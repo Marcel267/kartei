@@ -45,7 +45,7 @@ if ($_POST) {
         $editAdresse->setOrt($_POST['ort']);
         $editAdresse->setStraße($_POST['straße']);
 
-        $_SESSION['success'] = 'Adresse erfolgreich aktualisiert'; //für alert oder so...
+        $_SESSION['success'] = 'Adresse erfolgreich aktualisiert';
         //redirect
         header("Location: " . $_SERVER['url'] . "/kartei/src/Controller/edit_freund.php?freundId=" . $freundId);
         die();
@@ -60,6 +60,7 @@ include('../Components/_header.php');
     Adresse bearbeiten
 </h2>
 
-<?php include('../Form/_adresse.php') ?>
-
-<?php include('../Components/_footer.php'); ?>
+<?php
+include('../Form/_adresse.php');
+include('../Components/_footer.php');
+?>

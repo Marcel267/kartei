@@ -51,17 +51,6 @@ class Kartei
         return false;
     }
 
-    // public function updateFreundByKey(int $key, Freund $newFreund): bool
-    // {
-    //     foreach ($this->freunde as $index => $freund) {
-    //         if ($freund->getKey() === $key) {
-    //             $this->freunde[$index] = $newFreund;
-    //             return true;
-    //         }
-    //     }
-    //     return false;
-    // }
-
     public function searchFreundeByNachname(string $nachname): array
     {
         $result = [];

@@ -2,7 +2,6 @@
 
 class Adresse
 {
-    // private static int $nextId = 1;
     public static int $nextId;
     private int $id;
     private string $plz;

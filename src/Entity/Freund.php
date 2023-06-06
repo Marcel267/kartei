@@ -2,9 +2,7 @@
 
 class Freund
 {
-    // private static int $nextId = 1;
     public static int $nextId;
-    // public static int $nextId;
     private int $id;
     private string $vorname;
     private string $nachname;
@@ -14,7 +12,6 @@ class Freund
     public function __construct(string $vorname, string $nachname, string $geburtsdatum, array $adressen)
     {
         $this->id = self::$nextId++;
-        // $_SESSION['nextFreundId'] = $this->id;
         $this->vorname = $vorname;
         $this->nachname = $nachname;
         $this->geburtsdatum = $geburtsdatum;

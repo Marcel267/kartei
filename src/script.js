@@ -45,8 +45,6 @@ var searchInput = document.getElementById('search-input');
 var searchForm = document.getElementById('search-form');
 
 resetBtn.addEventListener('click', () => {
-    // console.log(document.getElementById('search-input'));
     searchInput.value = "";
     searchForm.submit();
-
 });
