@@ -21,11 +21,8 @@ if (isset($_SESSION['kartei'])) {
     $_SESSION['nextFreundId'] = 4;
     $_SESSION['nextAdresseId'] = 3;
 }
-//Unset session so it can be resest
-if (isset($_POST['resetData'])) {
-    session_unset();
-    session_destroy();
-}
+
+// var_dump($_SESSION['kartei']);
 
 //suche freunde
 $freunde = [];
@@ -37,6 +34,7 @@ if (isset($_GET['search']) && !empty($_GET['search'])) {
 } else {
     $freunde = $kartei->getFreunde();
 }
+// var_dump($freunde);
 
 $freundeCount = $freunde ? (count($freunde) > 1 ? count($freunde) . " Freunde" : count($freunde) . " Freund") : "Keine Freunde :(";
 
@@ -67,9 +65,23 @@ include('Components/_header.php');
                 <span>Reset</span>
             </button>
         </div>
-
-
     </div>
+
+    <button type="button" class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:focus:ring-yellow-900 flex gap-2 justify-center" data-modal-target="popup-modal-resetData" data-modal-toggle="popup-modal-resetData">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path clip-rule="evenodd" fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zM12 8.25a.75.75 0 01.75.75v3.75a.75.75 0 01-1.5 0V9a.75.75 0 01.75-.75zm0 8.25a.75.75 0 100-1.5.75.75 0 000 1.5z"></path>
+        </svg>
+        <span>Daten zurücksetzen</span>
+    </button>
+    <?php
+    $modal = new Modal(
+        'resetData',
+        'Willst du wirklich die Daten zurücksetzen?',
+        $_SERVER['url'] . '/kartei/src/Controller/reset_data.php',
+        'Ja, zurücksetzen'
+    );
+    echo $modal->render();
+    ?>
 </div>
 
 <div class="mt-4">
@@ -146,7 +158,8 @@ include('Components/_header.php');
                     $modal = new Modal(
                         $freund->getId(),
                         'Willst du wirklich ' . $freund->getFullName() . ' löschen?',
-                        $_SERVER['url'] . '/kartei/src/Controller/delete_freund.php?freundId=' . $freund->getId()
+                        $_SERVER['url'] . '/kartei/src/Controller/delete_freund.php?freundId=' . $freund->getId(),
+                        'Ja, löschen'
                     );
                     echo $modal->render();
                 } ?>

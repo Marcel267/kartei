@@ -80,7 +80,8 @@ include('../Components/_header.php');
         $modal = new Modal(
             $adresse->getId(),
             'Willst du wirklich die Adresse löschen?',
-            $_SERVER['url'] . '/kartei/src/Controller/delete_adresse.php?freundId=' . $freundId . '&adresseId=' . $adresse->getId()
+            $_SERVER['url'] . '/kartei/src/Controller/delete_adresse.php?freundId=' . $freundId . '&adresseId=' . $adresse->getId(),
+            'Ja, löschen'
         );
         echo $modal->render();
     } ?>
