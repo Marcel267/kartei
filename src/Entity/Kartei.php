@@ -24,12 +24,12 @@ class Kartei
         return $errors;
     }
 
-    public function addFreund(Freund $freund): void
+    public function addFreund(Freund $freund)
     {
         $this->freunde[] = $freund;
     }
 
-    public function getFreundByKey(int|string $key)
+    public function getFreundByKey(string $key): Freund|null
     {
         foreach ($this->freunde as $freund) {
             if ($freund->getId() == $key) {
