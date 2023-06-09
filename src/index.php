@@ -27,14 +27,14 @@ if (isset($_SESSION['kartei'])) {
 //suche freunde
 $freunde = [];
 if (isset($_GET['search']) && !empty($_GET['search'])) {
-    $freunde =
-        $kartei->getFreundByKey($_GET['search']) ? [$kartei->getFreundByKey($_GET['search'])]
-        :
-        $kartei->searchFreundeByNachname($_GET['search']);
+    if (ctype_digit($_GET['search'])) {
+        $freunde = [$kartei->getFreundByKey($_GET['search'])];
+    } else {
+        $freunde = $kartei->searchFreundeByNachname($_GET['search']);
+    }
 } else {
     $freunde = $kartei->getFreunde();
 }
-// var_dump($freunde);
 
 $freundeCount = $freunde ? (count($freunde) > 1 ? count($freunde) . " Freunde" : count($freunde) . " Freund") : "Keine Freunde :(";
 

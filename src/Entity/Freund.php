@@ -79,10 +79,10 @@ class Freund
         return false;
     }
 
-    public function getAdresseByKey(int $key): Adresse|null
-    {   
+    public function getAdresseByKey(int $key): ?Adresse
+    {
         foreach ($this->adressen as $adresse) {
-            if ($adresse->getId() == $key) {
+            if ($adresse->getId() === $key) {
                 return $adresse;
             }
         }

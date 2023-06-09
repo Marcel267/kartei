@@ -29,10 +29,10 @@ class Kartei
         $this->freunde[] = $freund;
     }
 
-    public function getFreundByKey(string $key): Freund|null
+    public function getFreundByKey(int $key): ?Freund
     {
         foreach ($this->freunde as $freund) {
-            if ($freund->getId() == $key) {
+            if ($freund->getId() === $key) {
                 return $freund;
             }
         }
