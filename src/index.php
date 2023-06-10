@@ -28,7 +28,8 @@ if (isset($_SESSION['kartei'])) {
 $freunde = [];
 if (isset($_GET['search']) && !empty($_GET['search'])) {
     if (ctype_digit($_GET['search'])) {
-        $freunde = [$kartei->getFreundByKey($_GET['search'])];
+        $freund = $kartei->getFreundByKey($_GET['search']);
+        $freunde = $freund ? [$freund] : [];
     } else {
         $freunde = $kartei->searchFreundeByNachname($_GET['search']);
     }
