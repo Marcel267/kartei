@@ -19,6 +19,7 @@
 
 <body class="bg-white dark:bg-slate-900 text-gray-900 dark:text-white min-h-screen ">
     <a class="transition left-0 bg-primary text-primary-content absolute p-0 m-0 -translate-y-16 focus:translate-y-0" href="#search-input">Skip to searchbar</a>
+    
     <nav class="bg-white border-gray-200 dark:bg-slate-900">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <a href="<?= $_SERVER['url'] ?>/kartei/src/index.php" class="flex items-center">
